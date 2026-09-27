@@ -15,14 +15,14 @@ import type { PosterFormState, OccasionType, PosterResult, AuthUser } from '@/ty
 // ─── Default form state ────────────────────────────────────────────────────────
 
 const DEFAULT_FORM: PosterFormState = {
-  occasionType:       '',
-  headline:           '',
-  subHeadline:        '',
-  dateLine:           '',
+  occasionType:       'victory_day',
+  headline:           'মহান বিজয় দিবস',
+  subHeadline:        '১৬ই ডিসেম্বর স্বাধীনতার রক্তিম শুভেচ্ছা',
+  dateLine:           '১৬ই ডিসেম্বর, ২০২৪',
   partyName:          '',
-  primaryColor:       '#0a3318',
+  primaryColor:       '#073318',
   accentColor:        '#FFD700',
-  enhanceWithGemini:  true,
+  enhanceWithGemini:  false,
   promoterName:       '',
   promoterDesignation:'',
   promoterArea:       '',

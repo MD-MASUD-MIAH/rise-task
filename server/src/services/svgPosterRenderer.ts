@@ -23,9 +23,9 @@ const getSharedStyles = () => `
   <filter id="bw-filter">
     <feColorMatrix type="matrix" values="0.33 0.33 0.33 0 0  0.33 0.33 0.33 0 0  0.33 0.33 0.33 0 0  0 0 0 1 0" />
     <feComponentTransfer>
-      <feFuncR type="linear" slope="1.1" intercept="-0.05" />
-      <feFuncG type="linear" slope="1.1" intercept="-0.05" />
-      <feFuncB type="linear" slope="1.1" intercept="-0.05" />
+      <feFuncR type="linear" slope="1.15" intercept="-0.06" />
+      <feFuncG type="linear" slope="1.15" intercept="-0.06" />
+      <feFuncB type="linear" slope="1.15" intercept="-0.06" />
     </feComponentTransfer>
   </filter>
 
@@ -98,10 +98,10 @@ const renderVictoryDay = (opts: PosterRenderOptions, width: number, height: numb
     ${getSharedStyles()}
 
     <!-- Deep Green Radial Gradient -->
-    <radialGradient id="v-bg" cx="50%" cy="40%" r="70%">
-      <stop offset="0%" stop-color="#0a4d22" />
-      <stop offset="60%" stop-color="#052813" />
-      <stop offset="100%" stop-color="#021208" />
+    <radialGradient id="v-bg" cx="50%" cy="38%" r="75%">
+      <stop offset="0%" stop-color="#0f682c" />
+      <stop offset="55%" stop-color="#053e18" />
+      <stop offset="100%" stop-color="#021c0a" />
     </radialGradient>
 
     <!-- Bright Red Bangladesh Sun -->
@@ -119,11 +119,20 @@ const renderVictoryDay = (opts: PosterRenderOptions, width: number, height: numb
       <stop offset="100%" stop-color="#b45309" />
     </linearGradient>
 
+    <!-- Top Ribbon Gradient -->
+    <linearGradient id="v-ribbon" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="transparent" />
+      <stop offset="20%" stop-color="#b45309" />
+      <stop offset="50%" stop-color="#fde047" />
+      <stop offset="80%" stop-color="#b45309" />
+      <stop offset="100%" stop-color="transparent" />
+    </linearGradient>
+
     <!-- Smriti Soudho Gradient -->
     <linearGradient id="v-soudho" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.22" />
-      <stop offset="50%" stop-color="#ffffff" stop-opacity="0.38" />
-      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.15" />
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.25" />
+      <stop offset="50%" stop-color="#ffffff" stop-opacity="0.45" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.18" />
     </linearGradient>
 
     <!-- Floral Corner Motif -->
@@ -140,7 +149,7 @@ const renderVictoryDay = (opts: PosterRenderOptions, width: number, height: numb
   <rect width="${width}" height="${height}" fill="url(#v-bg)" />
 
   <!-- Traditional Pattern Texture -->
-  <g opacity="0.06" stroke="${accent}" stroke-width="1">
+  <g opacity="0.08" stroke="${accent}" stroke-width="1">
     <pattern id="v-pat" width="60" height="60" patternUnits="userSpaceOnUse">
       <circle cx="30" cy="30" r="20" fill="none" stroke="${accent}" stroke-width="0.8" />
       <polygon points="30,10 40,30 30,50 20,30" fill="none" stroke="${accent}" stroke-width="0.8" />
@@ -149,10 +158,10 @@ const renderVictoryDay = (opts: PosterRenderOptions, width: number, height: numb
   </g>
 
   <!-- LARGE BRIGHT RED CIRCLE (Bangladesh Flag Sun) -->
-  <circle cx="600" cy="510" r="280" fill="url(#v-red-sun)" opacity="0.92" filter="url(#drop-shadow)" />
+  <circle cx="600" cy="510" r="280" fill="url(#v-red-sun)" opacity="0.95" filter="url(#drop-shadow)" />
 
   <!-- JATIYA SMRITI SOUDHO SILHOUETTE (National Monument) -->
-  <g transform="translate(600, 770)" opacity="0.35">
+  <g transform="translate(600, 770)" opacity="0.45">
     <!-- 7 Triangular Pairs -->
     <polygon points="0,-450 20,0 -20,0" fill="url(#v-soudho)" />
     <polygon points="-12,-380 -55,0 -20,0" fill="url(#v-soudho)" />
@@ -170,7 +179,7 @@ const renderVictoryDay = (opts: PosterRenderOptions, width: number, height: numb
   </g>
 
   <!-- FREEDOM FIGHTERS SILHOUETTE -->
-  <g transform="translate(600, 750)" opacity="0.45" fill="#011408">
+  <g transform="translate(600, 750)" opacity="0.6" fill="#011408">
     <!-- Hill Horizon -->
     <path d="M -600 20 Q -250 -15 0 10 Q 250 -15 600 20 L 600 50 L -600 50 Z" />
     <!-- Fighter 1 with Raised Rifle -->
@@ -181,8 +190,9 @@ const renderVictoryDay = (opts: PosterRenderOptions, width: number, height: numb
     <circle cx="-20" cy="-80" r="12" />
     <path d="M -25 -68 L -20 5 L -10 5 L -5 -40 L 15 -60 L 10 -65 L -15 -52 Z" />
     <line x1="-5" y1="-140" x2="-20" y2="5" stroke="#011408" stroke-width="5" />
-    <!-- Fluttering Flag -->
-    <path d="M -5 -140 Q 35 -155 70 -135 Q 35 -115 -5 -115 Z" fill="#011408" />
+    <!-- Fluttering Flag (Red and Green) -->
+    <path d="M -5 -140 Q 35 -155 70 -135 Q 35 -115 -5 -115 Z" fill="#006a4e" />
+    <circle cx="28" cy="-135" r="12" fill="#f42a41" />
     <!-- Fighter 3 Advancing -->
     <circle cx="90" cy="-65" r="10" />
     <path d="M 85 -55 L 90 5 L 100 5 L 100 -30 L 130 -45 L 125 -52 L 95 -40 Z" />
@@ -190,15 +200,15 @@ const renderVictoryDay = (opts: PosterRenderOptions, width: number, height: numb
   </g>
 
   <!-- Golden Borders & Traditional Floral Corners -->
-  <rect x="25" y="25" width="1150" height="1550" rx="16" fill="none" stroke="${accent}" stroke-width="3.5" opacity="0.85" />
-  <rect x="36" y="36" width="1128" height="1528" rx="12" fill="none" stroke="${accent}" stroke-width="1.5" stroke-dasharray="14 7" opacity="0.6" />
+  <rect x="25" y="25" width="1150" height="1550" rx="16" fill="none" stroke="${accent}" stroke-width="3.5" opacity="0.9" />
+  <rect x="36" y="36" width="1128" height="1528" rx="12" fill="none" stroke="${accent}" stroke-width="1.5" stroke-dasharray="14 7" opacity="0.65" />
   <use href="#v-corner" x="42" y="42" />
   <use href="#v-corner" transform="translate(1158, 42) scale(-1, 1)" />
   <use href="#v-corner" transform="translate(42, 1558) scale(1, -1)" />
   <use href="#v-corner" transform="translate(1158, 1558) scale(-1, -1)" />
 
   <!-- TOP BANNER -->
-  <polygon points="80,60 1120,60 1070,115 130,115" fill="linear-gradient(90deg, transparent, #b45309, ${accent}, #b45309, transparent)" />
+  <polygon points="80,60 1120,60 1070,115 130,115" fill="url(#v-ribbon)" />
   <text x="600" y="98" font-size="28" font-weight="900" fill="#03200d" text-anchor="middle" letter-spacing="1">
     ${opts.partyName ? escapeXml(opts.partyName) : 'বিসমিল্লাহির রাহমানির রাহিম'}
   </text>
@@ -227,7 +237,7 @@ const renderVictoryDay = (opts: PosterRenderOptions, width: number, height: numb
   }
 
   <!-- DIVIDER -->
-  <g transform="translate(600, 1030)" opacity="0.8">
+  <g transform="translate(600, 1030)" opacity="0.85">
     <line x1="-320" y1="0" x2="320" y2="0" stroke="${accent}" stroke-width="2" />
     <polygon points="0,-9 9,0 0,9 -9,0" fill="${accent}" />
     <circle cx="-160" cy="0" r="5" fill="${accent}" />
@@ -264,7 +274,7 @@ const renderVictoryDay = (opts: PosterRenderOptions, width: number, height: numb
     }
 
     <text x="600" y="240" font-size="14" font-weight="600" fill="#64748b" text-anchor="middle">
-      জাতীয় শোক ও গৌরবগাথা · RISE Poster Engine
+      জাতীয় গৌরবগাথা · RISE Poster Engine
     </text>
   </g>
 </svg>`;
@@ -278,9 +288,6 @@ const renderElection = (opts: PosterRenderOptions, width: number, height: number
   const hlLen = headline.length;
   const headlineSize = hlLen <= 10 ? 84 : hlLen <= 18 ? 68 : hlLen <= 26 ? 54 : 44;
 
-  // Hierarchical Leader & Candidate Arrangement:
-  // Top tier: 2 central leaders
-  // Mid tier: 1 PROMINENT candidate spotlight
   const leader1 = opts.leaders[0];
   const leader2 = opts.leaders[1];
   const candidate = opts.leaders[2] || { url: '', name: opts.promoterName, designation: 'মনোনীত প্রার্থী' };
@@ -290,18 +297,12 @@ const renderElection = (opts: PosterRenderOptions, width: number, height: number
   <defs>
     ${getSharedStyles()}
 
-    <!-- Deep Blue Dynamic Gradient -->
+    <!-- Deep Vibrant Royal Blue Gradient -->
     <radialGradient id="e-bg" cx="50%" cy="35%" r="75%">
       <stop offset="0%" stop-color="#1d4ed8" />
-      <stop offset="45%" stop-color="#0f2b66" />
-      <stop offset="100%" stop-color="#050e26" />
+      <stop offset="50%" stop-color="#0f2b66" />
+      <stop offset="100%" stop-color="#06122c" />
     </radialGradient>
-
-    <!-- Rayburst Gradient -->
-    <linearGradient id="e-rays" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.18" />
-      <stop offset="100%" stop-color="#38bdf8" stop-opacity="0.0" />
-    </linearGradient>
 
     <!-- White / Gold Text Gradient -->
     <linearGradient id="e-gold" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -316,13 +317,20 @@ const renderElection = (opts: PosterRenderOptions, width: number, height: number
       <stop offset="50%" stop-color="#ffffff" />
       <stop offset="100%" stop-color="#38bdf8" />
     </linearGradient>
+
+    <!-- Vote Button Red Gradient -->
+    <linearGradient id="e-vote-btn" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ef4444" />
+      <stop offset="70%" stop-color="#dc2626" />
+      <stop offset="100%" stop-color="#991b1b" />
+    </linearGradient>
   </defs>
 
   <!-- Deep Blue Background -->
   <rect width="${width}" height="${height}" fill="url(#e-bg)" />
 
   <!-- DYNAMIC RAYS & DIAGONAL MOTIFS -->
-  <g opacity="0.12" fill="white">
+  <g opacity="0.14" fill="#ffffff">
     <polygon points="600,0 480,1600 520,1600" />
     <polygon points="600,0 680,1600 720,1600" />
     <polygon points="600,0 1200,600 1200,700" />
@@ -332,18 +340,18 @@ const renderElection = (opts: PosterRenderOptions, width: number, height: number
   </g>
 
   <!-- STYLIZED BANGLADESH MAP OUTLINE (Watermark) -->
-  <g transform="translate(600, 520) scale(1.1)" opacity="0.14" stroke="#38bdf8" stroke-width="3" fill="none">
+  <g transform="translate(600, 520) scale(1.15)" opacity="0.18" stroke="#38bdf8" stroke-width="3.5" fill="none">
     <path d="M -10 -250 Q 80 -230 110 -150 Q 180 -100 190 -30 Q 240 20 220 120 Q 200 200 140 250 Q 50 290 0 310 Q -80 300 -140 240 Q -190 180 -210 100 Q -230 10 -180 -80 Q -140 -160 -80 -220 Z" />
   </g>
 
   <!-- Modern Borders -->
-  <rect x="25" y="25" width="1150" height="1550" rx="16" fill="none" stroke="#38bdf8" stroke-width="3" opacity="0.7" />
-  <rect x="36" y="36" width="1128" height="1528" rx="12" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-dasharray="16 8" opacity="0.4" />
+  <rect x="25" y="25" width="1150" height="1550" rx="16" fill="none" stroke="#38bdf8" stroke-width="3" opacity="0.8" />
+  <rect x="36" y="36" width="1128" height="1528" rx="12" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-dasharray="16 8" opacity="0.5" />
 
   <!-- TOP BANNER -->
   <rect x="100" y="55" width="1000" height="55" rx="28" fill="#0c1f4a" stroke="#38bdf8" stroke-width="2" />
   <text x="600" y="92" font-size="26" font-weight="900" fill="#ffffff" text-anchor="middle" letter-spacing="2">
-    ${opts.partyName ? escapeXml(opts.partyName) : 'গণপ্রজাতন্ত্রী বাংলাদেশ · জাতীয় নির্বাচন'}
+    ${opts.partyName ? escapeXml(opts.partyName) : 'গণপ্রজাতন্ত্রী বাংলাদেশ · জাতীয় সংসদ নির্বাচন'}
   </text>
 
   <!-- TOP TIER: 2 CENTRAL LEADERS -->
@@ -413,7 +421,7 @@ const renderElection = (opts: PosterRenderOptions, width: number, height: number
 
   <!-- VOTE FOR / ভোট দিন CALL TO ACTION (Distinct Red Banner) -->
   <g transform="translate(600, 990)" filter="url(#drop-shadow)">
-    <rect x="-240" y="-36" width="480" height="72" rx="36" fill="#dc2626" stroke="#ffffff" stroke-width="3" />
+    <rect x="-240" y="-36" width="480" height="72" rx="36" fill="url(#e-vote-btn)" stroke="#ffffff" stroke-width="3" />
     <circle cx="-180" cy="0" r="24" fill="#ffffff" />
     <path d="M -192 -2 L -184 8 L -168 -10" fill="none" stroke="#dc2626" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
     <text x="20" y="12" font-size="40" font-weight="900" fill="#ffffff" text-anchor="middle" letter-spacing="3">
@@ -471,18 +479,34 @@ const renderMemorial = (opts: PosterRenderOptions, width: number, height: number
   <defs>
     ${getSharedStyles()}
 
-    <!-- Dark Charcoal & Midnight Navy Gradient -->
-    <radialGradient id="m-bg" cx="50%" cy="35%" r="75%">
-      <stop offset="0%" stop-color="#141a29" />
-      <stop offset="50%" stop-color="#0a0d14" />
-      <stop offset="100%" stop-color="#030406" />
+    <!-- Dignified Royal Navy & Charcoal Gradient (Never flat black) -->
+    <radialGradient id="m-bg" cx="50%" cy="38%" r="75%">
+      <stop offset="0%" stop-color="#1e293b" />
+      <stop offset="55%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#050811" />
     </radialGradient>
+
+    <!-- Soft Aura Vignette in Defs (Valid SVG) -->
+    <radialGradient id="m-aura" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.08" />
+      <stop offset="60%" stop-color="#38bdf8" stop-opacity="0.02" />
+      <stop offset="100%" stop-color="transparent" />
+    </radialGradient>
+
+    <!-- Top Ribbon Gradient -->
+    <linearGradient id="m-top-ribbon" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="transparent" />
+      <stop offset="25%" stop-color="#991b1b" />
+      <stop offset="50%" stop-color="#dc2626" />
+      <stop offset="75%" stop-color="#991b1b" />
+      <stop offset="100%" stop-color="transparent" />
+    </linearGradient>
 
     <!-- Muted Elegant Red Gradient -->
     <linearGradient id="m-red" x1="0%" y1="0%" x2="0%" y2="100%">
       <stop offset="0%" stop-color="#fca5a5" />
       <stop offset="50%" stop-color="#ef4444" />
-      <stop offset="100%" stop-color="#991b1b" />
+      <stop offset="100%" stop-color="#b91c1c" />
     </linearGradient>
 
     <!-- Silver Frame Gradient -->
@@ -493,51 +517,57 @@ const renderMemorial = (opts: PosterRenderOptions, width: number, height: number
     </linearGradient>
 
     <!-- White Dove Motif -->
-    <g id="m-dove" fill="#ffffff" opacity="0.6">
+    <g id="m-dove" fill="#ffffff" opacity="0.85" filter="url(#drop-shadow)">
       <path d="M 0 0 C 15 -18 35 -25 50 -20 C 35 -10 25 5 22 15 C 32 12 45 10 55 12 C 40 22 25 25 15 22 C 10 28 0 35 -15 32 C -5 20 -2 10 0 0 Z" />
     </g>
 
     <!-- White Rajanigandha / Lily Garland Motif -->
-    <g id="m-flower" fill="#ffffff" opacity="0.5">
-      <circle cx="0" cy="0" r="4" fill="#fbbf24" />
-      <circle cx="0" cy="-10" r="5" />
-      <circle cx="9" cy="-4" r="5" />
-      <circle cx="6" cy="8" r="5" />
-      <circle cx="-6" cy="8" r="5" />
-      <circle cx="-9" cy="-4" r="5" />
+    <g id="m-flower">
+      <!-- Green stem leave -->
+      <ellipse cx="-12" cy="0" rx="6" ry="2" fill="#16a34a" />
+      <ellipse cx="12" cy="0" rx="6" ry="2" fill="#16a34a" />
+      <!-- White petals -->
+      <circle cx="0" cy="-10" r="6" fill="#ffffff" />
+      <circle cx="9" cy="-4" r="6" fill="#ffffff" />
+      <circle cx="6" cy="8" r="6" fill="#ffffff" />
+      <circle cx="-6" cy="8" r="6" fill="#ffffff" />
+      <circle cx="-9" cy="-4" r="6" fill="#ffffff" />
+      <!-- Gold center -->
+      <circle cx="0" cy="0" r="4.5" fill="#facc15" />
     </g>
   </defs>
 
-  <!-- Dark Solemn Background -->
+  <!-- Deep Royal Navy & Charcoal Base -->
   <rect width="${width}" height="${height}" fill="url(#m-bg)" />
 
-  <!-- Soft Vignette Lighting Effect -->
-  <circle cx="600" cy="460" r="450" fill="radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 70%)" />
+  <!-- Soft Vignette Lighting Effect (VALID URL REF) -->
+  <circle cx="600" cy="460" r="450" fill="url(#m-aura)" />
 
   <!-- Subtle Borders -->
-  <rect x="25" y="25" width="1150" height="1550" rx="14" fill="none" stroke="#475569" stroke-width="2" opacity="0.6" />
-  <rect x="35" y="35" width="1130" height="1530" rx="10" fill="none" stroke="#334155" stroke-width="1" stroke-dasharray="10 6" opacity="0.4" />
+  <rect x="25" y="25" width="1150" height="1550" rx="14" fill="none" stroke="#64748b" stroke-width="2.5" opacity="0.75" />
+  <rect x="35" y="35" width="1130" height="1530" rx="10" fill="none" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="12 6" opacity="0.45" />
 
   <!-- TOP MEMORIAL RIBBON & FLAG WITH BLACK RIBBON -->
+  <polygon points="100,55 1100,55 1050,105 150,105" fill="url(#m-top-ribbon)" />
   <g transform="translate(600, 85)">
     <!-- Tiny National Flag with Black Mourning Ribbon -->
-    <g transform="translate(-160, -18) scale(0.65)">
+    <g transform="translate(-200, -20) scale(0.7)">
       <rect x="0" y="0" width="80" height="48" rx="4" fill="#006a4e" />
       <circle cx="36" cy="24" r="16" fill="#f42a41" />
       <!-- Black ribbon overlay across corner -->
       <polygon points="0,0 24,0 0,24" fill="#000000" />
-      <line x1="0" y1="0" x2="30" y2="30" stroke="#000000" stroke-width="4" />
+      <line x1="0" y1="0" x2="30" y2="30" stroke="#000000" stroke-width="5" />
     </g>
 
     <!-- Top Text -->
-    <text x="30" y="10" font-size="26" font-weight="700" fill="#cbd5e1" text-anchor="middle" letter-spacing="3">
+    <text x="20" y="8" font-size="26" font-weight="800" fill="#ffffff" text-anchor="middle" letter-spacing="3">
       বিনম্র শ্রদ্ধা ও চিরন্তন স্মরণ
     </text>
   </g>
 
   <!-- FLYING WHITE DOVES (শান্তির প্রতীক পায়রা) -->
-  <use href="#m-dove" transform="translate(240, 260) scale(0.9)" />
-  <use href="#m-dove" transform="translate(930, 290) scale(-0.75, 0.75)" />
+  <use href="#m-dove" transform="translate(220, 260) scale(1.1)" />
+  <use href="#m-dove" transform="translate(950, 280) scale(-0.95, 0.95)" />
 
   <!-- MEMORIAL PORTRAITS: 1 Large B&W Central Leader + 2 Smaller Flanking -->
   <g transform="translate(0, 0)">
@@ -546,14 +576,15 @@ const renderMemorial = (opts: PosterRenderOptions, width: number, height: number
       sideLeader1
         ? `<g class="side-leader-1" filter="url(#soft-shadow)">
             <defs><clipPath id="m-side1-clip"><circle cx="350" cy="480" r="90" /></clipPath></defs>
-            <circle cx="350" cy="480" r="95" fill="none" stroke="#64748b" stroke-width="2.5" />
-            <circle cx="350" cy="480" r="90" fill="#0b0e14" />
+            <circle cx="350" cy="480" r="96" fill="none" stroke="#94a3b8" stroke-width="3" />
+            <circle cx="350" cy="480" r="90" fill="#0f172a" />
             ${
               sideLeader1.url
                 ? `<image href="${escapeXml(sideLeader1.url)}" x="260" y="390" width="180" height="180" preserveAspectRatio="xMidYMid slice" clip-path="url(#m-side1-clip)" />`
                 : `<circle cx="350" cy="480" r="90" fill="#1e293b" clip-path="url(#m-side1-clip)" />`
             }
-            <text x="350" y="598" font-size="16" font-weight="700" fill="#e2e8f0" text-anchor="middle">${escapeXml(sideLeader1.name)}</text>
+            <rect x="250" y="582" width="200" height="30" rx="6" fill="#0f172a" stroke="#64748b" stroke-width="1.5" />
+            <text x="350" y="603" font-size="16" font-weight="700" fill="#ffffff" text-anchor="middle">${escapeXml(sideLeader1.name)}</text>
           </g>`
         : ''
     }
@@ -563,14 +594,15 @@ const renderMemorial = (opts: PosterRenderOptions, width: number, height: number
       sideLeader2
         ? `<g class="side-leader-2" filter="url(#soft-shadow)">
             <defs><clipPath id="m-side2-clip"><circle cx="850" cy="480" r="90" /></clipPath></defs>
-            <circle cx="850" cy="480" r="95" fill="none" stroke="#64748b" stroke-width="2.5" />
-            <circle cx="850" cy="480" r="90" fill="#0b0e14" />
+            <circle cx="850" cy="480" r="96" fill="none" stroke="#94a3b8" stroke-width="3" />
+            <circle cx="850" cy="480" r="90" fill="#0f172a" />
             ${
               sideLeader2.url
                 ? `<image href="${escapeXml(sideLeader2.url)}" x="760" y="390" width="180" height="180" preserveAspectRatio="xMidYMid slice" clip-path="url(#m-side2-clip)" />`
                 : `<circle cx="850" cy="480" r="90" fill="#1e293b" clip-path="url(#m-side2-clip)" />`
             }
-            <text x="850" y="598" font-size="16" font-weight="700" fill="#e2e8f0" text-anchor="middle">${escapeXml(sideLeader2.name)}</text>
+            <rect x="750" y="582" width="200" height="30" rx="6" fill="#0f172a" stroke="#64748b" stroke-width="1.5" />
+            <text x="850" y="603" font-size="16" font-weight="700" fill="#ffffff" text-anchor="middle">${escapeXml(sideLeader2.name)}</text>
           </g>`
         : ''
     }
@@ -581,29 +613,29 @@ const renderMemorial = (opts: PosterRenderOptions, width: number, height: number
         <clipPath id="m-center-clip"><circle cx="600" cy="460" r="140" /></clipPath>
       </defs>
       <!-- Dignified Silver & Charcoal Ring -->
-      <circle cx="600" cy="460" r="148" fill="none" stroke="url(#m-silver)" stroke-width="4.5" />
-      <circle cx="600" cy="460" r="140" fill="#0b0e14" />
+      <circle cx="600" cy="460" r="149" fill="none" stroke="url(#m-silver)" stroke-width="5" />
+      <circle cx="600" cy="460" r="140" fill="#0f172a" />
       ${
         centralLeader?.url
           ? `<image href="${escapeXml(centralLeader.url)}" x="460" y="320" width="280" height="280" preserveAspectRatio="xMidYMid slice" clip-path="url(#m-center-clip)" filter="url(#bw-filter)" />`
           : `<circle cx="600" cy="460" r="140" fill="#1e293b" clip-path="url(#m-center-clip)" />`
       }
-      <circle cx="600" cy="460" r="140" fill="none" stroke="#000000" stroke-width="2" />
+      <circle cx="600" cy="460" r="140" fill="none" stroke="#ffffff" stroke-width="2.5" />
       <!-- Black Ribbon Badge at Bottom of Portrait -->
-      <rect x="470" y="618" width="260" height="36" rx="8" fill="#000000" stroke="#64748b" stroke-width="1.5" />
-      <text x="600" y="642" font-size="19" font-weight="800" fill="#ffffff" text-anchor="middle">${escapeXml(centralLeader?.name || 'চিরস্মরণীয় নেতা')}</text>
-      ${centralLeader?.designation ? `<text x="600" y="674" font-size="15" font-weight="500" fill="#94a3b8" text-anchor="middle">${escapeXml(centralLeader.designation)}</text>` : ''}
+      <rect x="460" y="618" width="280" height="38" rx="8" fill="#000000" stroke="#94a3b8" stroke-width="2" />
+      <text x="600" y="644" font-size="20" font-weight="900" fill="#ffffff" text-anchor="middle">${escapeXml(centralLeader?.name || 'চিরস্মরণীয় নেতা')}</text>
+      ${centralLeader?.designation ? `<text x="600" y="678" font-size="16" font-weight="600" fill="#cbd5e1" text-anchor="middle">${escapeXml(centralLeader.designation)}</text>` : ''}
     </g>
   </g>
 
-  <!-- WHITE FLORAL GARLAND (রজনীগন্ধা / সাদা ফুল) -->
-  <g transform="translate(600, 715)">
-    <use href="#m-flower" x="-120" y="0" />
-    <use href="#m-flower" x="-60" y="5" />
-    <use href="#m-flower" x="0" y="8" />
-    <use href="#m-flower" x="60" y="5" />
-    <use href="#m-flower" x="120" y="0" />
-    <line x1="-160" y1="0" x2="160" y2="0" stroke="#ffffff" stroke-width="1" opacity="0.3" />
+  <!-- WHITE & GOLD FLORAL GARLAND (রজনীগন্ধা / সাদা ফুল) -->
+  <g transform="translate(600, 725)" filter="url(#soft-shadow)">
+    <use href="#m-flower" x="-140" y="0" />
+    <use href="#m-flower" x="-70" y="6" />
+    <use href="#m-flower" x="0" y="10" transform="scale(1.2)" />
+    <use href="#m-flower" x="70" y="6" />
+    <use href="#m-flower" x="140" y="0" />
+    <line x1="-180" y1="2" x2="180" y2="2" stroke="#94a3b8" stroke-width="2" opacity="0.6" />
   </g>
 
   <!-- MUTED ELEGANT RED HEADLINE: শোকাবহ আগস্ট / বিনম্র শ্রদ্ধাঞ্জলি -->
@@ -614,50 +646,53 @@ const renderMemorial = (opts: PosterRenderOptions, width: number, height: number
   </g>
 
   <!-- SUBHEADLINE -->
-  <text x="600" y="900" font-size="32" font-weight="600" fill="#e2e8f0" text-anchor="middle" opacity="0.95">
+  <text x="600" y="900" font-size="34" font-weight="700" fill="#ffffff" text-anchor="middle" filter="url(#drop-shadow)">
     ${escapeXml(subHeadline)}
   </text>
   ${
     opts.dateLine
-      ? `<text x="600" y="955" font-size="22" font-weight="700" fill="#94a3b8" text-anchor="middle">
-          ${escapeXml(opts.dateLine)}
-        </text>`
+      ? `<g transform="translate(600, 960)">
+          <rect x="-180" y="-22" width="360" height="44" rx="22" fill="#0f172a" stroke="#ef4444" stroke-width="1.8" />
+          <text x="0" y="8" font-size="22" font-weight="800" fill="#fca5a5" text-anchor="middle">${escapeXml(opts.dateLine)}</text>
+        </g>`
       : ''
   }
 
   <!-- SOLEMN DIVIDER -->
-  <g transform="translate(600, 1020)" opacity="0.4">
-    <line x1="-250" y1="0" x2="250" y2="0" stroke="#94a3b8" stroke-width="1.5" />
-    <circle cx="0" cy="0" r="4" fill="#94a3b8" />
+  <g transform="translate(600, 1030)" opacity="0.6">
+    <line x1="-280" y1="0" x2="280" y2="0" stroke="#94a3b8" stroke-width="2" />
+    <circle cx="0" cy="0" r="5" fill="#ef4444" />
+    <circle cx="-140" cy="0" r="4" fill="#94a3b8" />
+    <circle cx="140" cy="0" r="4" fill="#94a3b8" />
   </g>
 
-  <!-- REFINED, SIMPLE CREDIT LINE (Understated, respectful) -->
-  <g transform="translate(0, 1280)">
-    <rect x="80" y="0" width="1040" height="230" rx="16" fill="#080b11" stroke="#334155" stroke-width="1.5" filter="url(#drop-shadow)" />
-    <line x1="100" y1="2" x2="1100" y2="2" stroke="#ef4444" stroke-width="3" opacity="0.8" />
+  <!-- REFINED, ELEGANT CREDIT LINE (Dignified Navy & Silver Card) -->
+  <g transform="translate(0, 1260)">
+    <rect x="60" y="0" width="1080" height="260" rx="20" fill="#09101d" stroke="#475569" stroke-width="2" filter="url(#drop-shadow)" />
+    <line x1="80" y1="2" x2="1120" y2="2" stroke="#dc2626" stroke-width="5" stroke-linecap="round" />
 
-    <text x="600" y="44" font-size="18" font-weight="500" fill="#94a3b8" text-anchor="middle" letter-spacing="2">
-      শ্রদ্ধাবনত চিত্তে:
+    <text x="600" y="48" font-size="20" font-weight="600" fill="#94a3b8" text-anchor="middle" letter-spacing="2">
+      — শ্রদ্ধাবনত চিত্তে —
     </text>
 
     <!-- Promoter Name -->
-    <text x="600" y="100" font-size="40" font-weight="800" fill="#f8fafc" text-anchor="middle">
+    <text x="600" y="106" font-size="44" font-weight="900" fill="#ffffff" text-anchor="middle">
       ${escapeXml(opts.promoterName)}
     </text>
 
-    <text x="600" y="146" font-size="24" font-weight="600" fill="#cbd5e1" text-anchor="middle">
+    <text x="600" y="154" font-size="26" font-weight="700" fill="#cbd5e1" text-anchor="middle">
       ${escapeXml(opts.promoterDesignation)} · ${escapeXml(opts.promoterArea)}
     </text>
 
     ${
       opts.promoterContact
-        ? `<text x="600" y="186" font-size="18" font-weight="400" fill="#64748b" text-anchor="middle">
-            ${escapeXml(opts.promoterContact)}
+        ? `<text x="600" y="196" font-size="20" font-weight="500" fill="#94a3b8" text-anchor="middle">
+            যোগাযোগ: ${escapeXml(opts.promoterContact)}
           </text>`
         : ''
     }
 
-    <text x="600" y="215" font-size="13" font-weight="400" fill="#475569" text-anchor="middle">
+    <text x="600" y="236" font-size="14" font-weight="500" fill="#475569" text-anchor="middle">
       চির জাগ্রত স্মৃতি · বিনম্র শ্রদ্ধাঞ্জলি · RISE Poster Engine
     </text>
   </g>
@@ -719,6 +754,15 @@ const renderGreetings = (opts: PosterRenderOptions, width: number, height: numbe
       <stop offset="100%" stop-color="#1f0902" />
     </radialGradient>
 
+    <!-- Top Ribbon Gradient -->
+    <linearGradient id="g-ribbon" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="transparent" />
+      <stop offset="20%" stop-color="#b45309" />
+      <stop offset="50%" stop-color="#fde047" />
+      <stop offset="80%" stop-color="#b45309" />
+      <stop offset="100%" stop-color="transparent" />
+    </linearGradient>
+
     <!-- Festive Gold Typography Gradient -->
     <linearGradient id="g-gold" x1="0%" y1="0%" x2="0%" y2="100%">
       <stop offset="0%" stop-color="#ffffff" />
@@ -728,7 +772,7 @@ const renderGreetings = (opts: PosterRenderOptions, width: number, height: numbe
     </linearGradient>
 
     <!-- Traditional Alpona Mandala Pattern -->
-    <g id="g-mandala" stroke="${accent}" stroke-width="1.2" fill="none" opacity="0.16">
+    <g id="g-mandala" stroke="${accent}" stroke-width="1.2" fill="none" opacity="0.18">
       <circle cx="0" cy="0" r="180" />
       <circle cx="0" cy="0" r="140" stroke-dasharray="8 6" />
       <circle cx="0" cy="0" r="100" />
@@ -745,7 +789,7 @@ const renderGreetings = (opts: PosterRenderOptions, width: number, height: numbe
     </g>
 
     <!-- Crescent Moon & Star Motif (চাঁদ-তারা) -->
-    <g id="g-crescent" fill="${accent}" opacity="0.85">
+    <g id="g-crescent" fill="${accent}" opacity="0.88">
       <path d="M 0 -35 A 35 35 0 1 0 32 18 A 30 30 0 1 1 -2 -22 Z" />
       <!-- Star -->
       <polygon points="18,-18 22,-8 32,-8 24,-2 27,8 18,2 10,8 13,-2 5,-8 15,-8" />
@@ -764,8 +808,8 @@ const renderGreetings = (opts: PosterRenderOptions, width: number, height: numbe
   <use href="#g-mandala" x="600" y="460" transform="scale(1.4)" />
 
   <!-- Crescent Moons & Stars in Upper Corners -->
-  <use href="#g-crescent" transform="translate(180, 190) scale(1.1)" filter="url(#gold-glow)" />
-  <use href="#g-crescent" transform="translate(1020, 190) scale(-1.1, 1.1)" filter="url(#gold-glow)" />
+  <use href="#g-crescent" transform="translate(180, 190) scale(1.15)" filter="url(#gold-glow)" />
+  <use href="#g-crescent" transform="translate(1020, 190) scale(-1.15, 1.15)" filter="url(#gold-glow)" />
 
   <!-- Festive Sparkles -->
   <use href="#g-sparkle" transform="translate(300, 310) scale(1.2)" />
@@ -775,11 +819,11 @@ const renderGreetings = (opts: PosterRenderOptions, width: number, height: numbe
   <use href="#g-sparkle" transform="translate(600, 750) scale(1.5)" />
 
   <!-- Traditional Decorative Borders -->
-  <rect x="25" y="25" width="1150" height="1550" rx="16" fill="none" stroke="${accent}" stroke-width="3.5" opacity="0.85" />
-  <rect x="36" y="36" width="1128" height="1528" rx="12" fill="none" stroke="${accent}" stroke-width="1.5" stroke-dasharray="14 7" opacity="0.5" />
+  <rect x="25" y="25" width="1150" height="1550" rx="16" fill="none" stroke="${accent}" stroke-width="3.5" opacity="0.9" />
+  <rect x="36" y="36" width="1128" height="1528" rx="12" fill="none" stroke="${accent}" stroke-width="1.5" stroke-dasharray="14 7" opacity="0.6" />
 
   <!-- TOP RIBBON -->
-  <polygon points="80,60 1120,60 1070,115 130,115" fill="linear-gradient(90deg, transparent, #b45309, ${accent}, #b45309, transparent)" />
+  <polygon points="80,60 1120,60 1070,115 130,115" fill="url(#g-ribbon)" />
   <text x="600" y="98" font-size="28" font-weight="900" fill="#2a0a03" text-anchor="middle" letter-spacing="1">
     ${opts.partyName ? escapeXml(opts.partyName) : 'উৎসবের আনন্দ ছড়িয়ে পড়ুক সবার মাঝে'}
   </text>

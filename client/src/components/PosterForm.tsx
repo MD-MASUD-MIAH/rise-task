@@ -77,7 +77,19 @@ export default function PosterForm({ form, onChange }: Props) {
             <select
               className="input-field"
               value={form.occasionType}
-              onChange={(e) => onChange({ occasionType: e.target.value as OccasionType })}
+              onChange={(e) => {
+                const newOccasion = e.target.value as OccasionType;
+                const occDefaults: Record<string, Partial<PosterFormState>> = {
+                  victory_day: { headline: 'মহান বিজয় দিবস', subHeadline: '১৬ই ডিসেম্বর স্বাধীনতার রক্তিম শুভেচ্ছা', dateLine: '১৬ই ডিসেম্বর, ২০২৪', primaryColor: '#073318', accentColor: '#FFD700' },
+                  election:    { headline: 'টেক ব্যাক বাংলাদেশ', subHeadline: 'উন্নয়ন ও জনগণের ভোটাধিকার রক্ষায়', dateLine: 'জাতীয় সংসদ নির্বাচন', primaryColor: '#0b1e48', accentColor: '#38bdf8' },
+                  memorial:    { headline: 'শোকাবহ আগস্ট', subHeadline: 'শ্রদ্ধাঞ্জলি ও স্মরণ অনুষ্ঠান', dateLine: '১৫ই আগস্ট শোক দিবস', primaryColor: '#090d16', accentColor: '#ef4444' },
+                  greetings:   { headline: 'ঈদ মোবারক', subHeadline: 'উৎসব ও বিশেষ দিনের শুভেচ্ছা বার্তা', dateLine: 'পবিত্র ঈদ-উল-ফিতর', primaryColor: '#7c2d12', accentColor: '#fbbf24' },
+                };
+                onChange({
+                  occasionType: newOccasion,
+                  ...(occDefaults[newOccasion] || {}),
+                });
+              }}
             >
               {(Object.entries(OCCASION_LABELS) as [OccasionType, string][]).map(([k, v]) => (
                 <option key={k} value={k}>{v}</option>
