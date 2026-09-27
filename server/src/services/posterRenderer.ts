@@ -11,7 +11,7 @@
  *  - Full render timing metrics
  */
 
-import puppeteer, { type Browser, type Page } from 'puppeteer';
+import type { Browser, Page } from 'puppeteer';
 import { generatePosterHtml } from '../templates/posterTemplate';
 import type { PosterRenderOptions, RenderResult } from '../types/poster.types';
 
@@ -27,6 +27,10 @@ const getBrowser = async (): Promise<Browser> => {
   if (_browser?.connected) return _browser;
 
   console.log('🌐 Launching Chromium for poster rendering…');
+
+  // Dynamic import to support ESM package in CommonJS runtime
+  const puppeteerModule = await (Function('return import("puppeteer")')() as Promise<typeof import('puppeteer')>);
+  const puppeteer = puppeteerModule.default || puppeteerModule;
 
   _browser = await puppeteer.launch({
     headless: true,
@@ -187,5 +191,10 @@ export const closeBrowser = async (): Promise<void> => {
  * Call this at server startup.
  */
 export const warmupBrowser = async (): Promise<void> => {
-  await getBrowser();
+  try {
+    await getBrowser();
+  } catch (err: unknown) {
+    const msg = err instanceof Error ? err.message : String(err);
+    console.warn('⚠️ Chromium warmup skipped or unavailable:', msg);
+  }
 };

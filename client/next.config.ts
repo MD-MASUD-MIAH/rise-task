@@ -14,6 +14,7 @@ const nextConfig: NextConfig = {
       { protocol: 'http',  hostname: 'localhost',            port: '5000', pathname: '/uploads/**' },
       { protocol: 'https', hostname: '*.cloudinary.com',    pathname: '/**' },
       { protocol: 'https', hostname: 'images.unsplash.com', pathname: '/**' },
+      { protocol: 'https', hostname: '*.vercel.app',        pathname: '/**' },
     ],
   },
 };

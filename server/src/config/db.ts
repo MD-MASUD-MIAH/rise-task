@@ -24,9 +24,18 @@ const startMemoryServer = async (): Promise<string> => {
 // ─── Connect ──────────────────────────────────────────────────────────────────
 
 export const connectDB = async (): Promise<void> => {
+  // If already connected, reuse existing mongoose connection (vital for serverless)
+  if (mongoose.connection.readyState === 1) {
+    return;
+  }
+
   let uri = process.env.MONGODB_URI ?? '';
 
   if (isPlaceholderUri(uri)) {
+    if (process.env.VERCEL) {
+      console.warn('⚠️ MONGODB_URI is not set on Vercel. Database operations will fail until configured.');
+      return;
+    }
     if (process.env.NODE_ENV === 'production') {
       console.error('❌ MONGODB_URI must be set in production.');
       process.exit(1);
@@ -38,12 +47,14 @@ export const connectDB = async (): Promise<void> => {
   try {
     mongoose.set('strictQuery', true);
     const conn = await mongoose.connect(uri, {
-      serverSelectionTimeoutMS: 10_000,
+      serverSelectionTimeoutMS: 5_000,
     });
     console.log(`✅ MongoDB connected: ${conn.connection.host} — DB: ${conn.connection.name}`);
   } catch (error) {
     console.error('❌ MongoDB connection error:', error);
-    process.exit(1);
+    if (!process.env.VERCEL) {
+      process.exit(1);
+    }
   }
 };
 
