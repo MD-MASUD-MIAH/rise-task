@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: 'RISE Poster — রাজনৈতিক পোস্টার জেনারেটর',
   description:
     'AI-powered political poster generator for Bangladeshi campaigns. Create stunning Bangla posters in seconds.',
-  keywords: ['poster', 'political', 'bangladesh', 'bangla', 'পোস্টার', 'নির্বাচন'],
+  keywords: 'poster, political, bangladesh, bangla, পোস্টার, নির্বাচন',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
