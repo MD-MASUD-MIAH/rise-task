@@ -134,7 +134,9 @@ export const createPoster = async (formData: FormData): Promise<PosterResult> =>
       logout();
       throw new Error('আপনার লগইন সেশনের মেয়াদ শেষ হয়েছে। অনুগ্রহ করে পুনরায় লগইন করুন।');
     }
-    throw new Error(json.message ?? 'Poster generation failed');
+    const serverDetail = (json as unknown as Record<string, unknown>).detail as string | undefined;
+    const errMsg = serverDetail ? `${json.message}: ${serverDetail}` : (json.message ?? 'পোস্টার তৈরিতে সমস্যা হয়েছে।');
+    throw new Error(errMsg);
   }
   return json.data;
 };

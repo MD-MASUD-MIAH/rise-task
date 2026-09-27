@@ -96,9 +96,17 @@ export const uploadSingle = multer(baseOptions).single('image');
  * In local mode, we construct a localhost URL.
  */
 export const getUploadedFileUrl = (file: Express.Multer.File): string => {
-  if (UPLOAD_MODE === 'cloudinary') {
-    // multer-storage-cloudinary stores the URL in file.path
+  if (UPLOAD_MODE === 'cloudinary' && file.path && file.path.startsWith('http')) {
     return file.path;
+  }
+  // For serverless or local mode, convert to base64 data URI so images never break across containers
+  if (file.path && fs.existsSync(file.path)) {
+    try {
+      const data = fs.readFileSync(file.path);
+      return `data:${file.mimetype || 'image/jpeg'};base64,${data.toString('base64')}`;
+    } catch {
+      // fallback
+    }
   }
   const baseUrl =
     process.env.API_BASE_URL ||

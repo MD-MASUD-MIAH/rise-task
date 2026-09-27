@@ -69,16 +69,24 @@ const uploadToCloudinary = (buffer: Buffer, publicId: string): Promise<string> =
 
 // ─── Public API ───────────────────────────────────────────────────────────────
 
-/**
- * Persists a rendered poster PNG buffer and returns its public URL.
- * @param buffer  PNG image buffer from posterRenderer
- * @param posterId  MongoDB ObjectId string — used as the filename/public_id
- */
 export const savePosterBuffer = async (buffer: Buffer, posterId: string): Promise<string> => {
-  const filename = `poster-${posterId}.png`;
+  const isSvg = buffer.slice(0, 100).toString('utf-8').includes('<svg');
+  const ext = isSvg ? 'svg' : 'png';
+  const filename = `poster-${posterId}.${ext}`;
 
-  if (STORAGE_MODE === 'cloudinary') {
-    return uploadToCloudinary(buffer, `poster-${posterId}`);
+  if (STORAGE_MODE === 'cloudinary' && process.env.CLOUDINARY_CLOUD_NAME) {
+    try {
+      return await uploadToCloudinary(buffer, `poster-${posterId}`);
+    } catch (err) {
+      console.warn('⚠️ Cloudinary upload failed, falling back to data URL:', err);
+    }
+  }
+
+  // On Vercel serverless, ephemeral /tmp is isolated per request container.
+  // Returning a self-contained data URL guarantees the image always renders immediately!
+  if (process.env.VERCEL) {
+    const mime = isSvg ? 'image/svg+xml;charset=utf-8' : 'image/png';
+    return `data:${mime};base64,${buffer.toString('base64')}`;
   }
 
   return saveLocally(buffer, filename);
