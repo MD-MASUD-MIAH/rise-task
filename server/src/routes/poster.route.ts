@@ -1,6 +1,6 @@
 import { Router, Request, Response, NextFunction } from 'express';
 import { createPoster, getMyPosters, getPosterById } from '../controllers/poster.controller';
-import { verifyToken } from '../middleware/auth.middleware';
+import { verifyToken, optionalVerifyToken } from '../middleware/auth.middleware';
 import { uploadLeaderPhotos } from '../middleware/upload.middleware';
 
 const router = Router();
@@ -46,7 +46,7 @@ const withUpload = (
  * Files (multipart):
  *   leaderPhotos       - Up to 3 image files (JPEG / PNG / WebP)
  */
-router.post('/', verifyToken, withUpload, (req, res) => {
+router.post('/', optionalVerifyToken, withUpload, (req, res) => {
   void createPoster(req, res);
 });
 

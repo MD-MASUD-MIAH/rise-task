@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 
-const JWT_SECRET = process.env.JWT_SECRET ?? 'changeme_secret';
+const JWT_SECRET = process.env.JWT_SECRET || 'rise_task_jwt_secret_key_2026_super_secure';
 
 export interface JwtTokenPayload {
   userId: string;
@@ -43,6 +43,30 @@ export const verifyToken = (req: Request, res: Response, next: NextFunction): vo
       message: isExpired ? 'Token expired. Please log in again.' : 'Invalid token.',
     });
   }
+};
+
+/**
+ * Optional JWT verification middleware — attaches `req.user` if valid,
+ * but allows guest / anonymous users if token is missing or expired.
+ */
+export const optionalVerifyToken = (req: Request, _res: Response, next: NextFunction): void => {
+  const authHeader = req.headers.authorization;
+
+  if (!authHeader?.startsWith('Bearer ')) {
+    next();
+    return;
+  }
+
+  const token = authHeader.slice(7);
+
+  try {
+    const decoded = jwt.verify(token, JWT_SECRET) as JwtTokenPayload;
+    req.user = { userId: decoded.userId, role: decoded.role };
+  } catch {
+    // If token is invalid or expired, continue as guest
+    req.user = undefined;
+  }
+  next();
 };
 
 /**

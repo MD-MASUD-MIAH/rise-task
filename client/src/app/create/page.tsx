@@ -60,7 +60,11 @@ export default function CreatePage() {
   // Restore user from localStorage on mount
   useEffect(() => {
     const saved = getUser();
-    if (saved && getToken()) setUser(saved);
+    if (saved) {
+      setUser(saved);
+    } else {
+      setUser(null);
+    }
   }, []);
 
   // Cycle through loading messages while rendering
@@ -78,7 +82,6 @@ export default function CreatePage() {
   // ── Submit ─────────────────────────────────────────────────────────────────
 
   const handleSubmit = async () => {
-    if (!getToken()) { setShowAuth(true); return; }
     if (!form.headline.trim()) { setErrorMsg('শীর্ষ স্লোগান / বার্তা আবশ্যক।'); return; }
     if (!form.promoterName.trim() || !form.promoterDesignation.trim() || !form.promoterArea.trim()) {
       setErrorMsg('নাম, পদবি এবং এলাকা আবশ্যক।');
@@ -116,7 +119,12 @@ export default function CreatePage() {
       setResult(posterResult);
       setPageState('success');
     } catch (err) {
-      setErrorMsg(err instanceof Error ? err.message : 'পোস্টার তৈরিতে সমস্যা হয়েছে।');
+      const msg = err instanceof Error ? err.message : 'পোস্টার তৈরিতে সমস্যা হয়েছে।';
+      if (msg.includes('লগইন') || msg.includes('token') || msg.includes('Token')) {
+        logout();
+        setUser(null);
+      }
+      setErrorMsg(msg);
       setPageState('error');
     }
   };
@@ -250,9 +258,22 @@ export default function CreatePage() {
 
           {/* Error */}
           {errorMsg && pageState === 'error' && (
-            <div className="flex items-start gap-3 p-4 rounded-xl bg-red-900/20 border border-red-800/50 fade-up">
-              <AlertCircle size={18} className="text-red-400 flex-shrink-0 mt-0.5" />
-              <p className="font-bangla text-red-300 text-sm">{errorMsg}</p>
+            <div className="flex items-center justify-between gap-3 p-4 rounded-xl bg-red-900/20 border border-red-800/50 fade-up">
+              <div className="flex items-start gap-3">
+                <AlertCircle size={18} className="text-red-400 flex-shrink-0 mt-0.5" />
+                <p className="font-bangla text-red-300 text-sm">{errorMsg}</p>
+              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  logout();
+                  setUser(null);
+                  setShowAuth(true);
+                }}
+                className="font-bangla text-xs bg-red-800/40 hover:bg-red-800/70 text-red-200 px-3 py-1.5 rounded-lg border border-red-700/50 flex-shrink-0 transition-colors"
+              >
+                লগইন করুন
+              </button>
             </div>
           )}
 
@@ -271,7 +292,7 @@ export default function CreatePage() {
 
             {!user && (
               <p className="font-bangla text-center text-[var(--text-muted)] text-xs mt-3">
-                পোস্টার তৈরি করতে{' '}
+                পোস্টার হিস্ট্রি সেভ রাখতে{' '}
                 <button onClick={() => setShowAuth(true)} className="text-green-400 hover:underline">
                   লগইন করুন
                 </button>
