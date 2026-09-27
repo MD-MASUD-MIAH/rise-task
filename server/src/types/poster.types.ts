@@ -19,6 +19,8 @@ export interface PosterRenderOptions {
   height?: number;
 
   // ── Content ────────────────────────────────────────────────────────────────
+  /** Occasion category: 'victory_day' | 'election' | 'memorial' | 'greetings' */
+  occasionType?: string;
   /** Main headline in Bangla — e.g. 'মহান বিজয় দিবস' */
   headline: string;
   /** Secondary line below headline — e.g. 'উপলক্ষে আন্তরিক শুভেচ্ছা' */

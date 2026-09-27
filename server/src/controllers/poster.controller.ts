@@ -139,6 +139,7 @@ export const createPoster = async (req: Request, res: Response): Promise<void> =
     const renderOptions: PosterRenderOptions = {
       width: 1200,
       height: 1600,
+      occasionType: body.occasionType,
       headline: body.headline,
       subHeadline: activeSubHeadline,
       dateLine: body.dateLine,
