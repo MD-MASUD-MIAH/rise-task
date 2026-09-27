@@ -102,8 +102,6 @@ export const getUploadedFileUrl = (file: Express.Multer.File): string => {
   }
   const baseUrl =
     process.env.API_BASE_URL ||
-    (process.env.VERCEL
-      ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL || process.env.VERCEL_URL || 'server-delta-six-13.vercel.app'}`
-      : `http://localhost:${process.env.PORT ?? 5000}`);
+    'https://server-delta-six-13.vercel.app';
   return `${baseUrl}/uploads/${file.filename}`;
 };

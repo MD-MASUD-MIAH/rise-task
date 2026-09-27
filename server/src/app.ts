@@ -12,7 +12,7 @@ import posterRouter from './routes/poster.route';
 // ─── App Setup ───────────────────────────────────────────────────────────────
 
 const app: Application = express();
-const CLIENT_ORIGIN = process.env.CLIENT_ORIGIN ?? 'http://localhost:3000';
+const CLIENT_ORIGIN = process.env.CLIENT_ORIGIN ?? 'https://client-psi-rust-86.vercel.app';
 
 // ─── Middleware ───────────────────────────────────────────────────────────────
 
