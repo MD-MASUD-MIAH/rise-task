@@ -11,7 +11,9 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { v2 as cloudinary } from 'cloudinary';
 
-const OUTPUT_DIR = path.resolve(process.cwd(), 'output');
+const OUTPUT_DIR = process.env.VERCEL
+  ? '/tmp/output'
+  : path.resolve(process.cwd(), 'output');
 const STORAGE_MODE = process.env.STORAGE_MODE ?? 'local';
 
 // ─── Cloudinary init (lazy) ───────────────────────────────────────────────────
@@ -34,7 +36,11 @@ const saveLocally = async (buffer: Buffer, filename: string): Promise<string> =>
     fs.mkdirSync(OUTPUT_DIR, { recursive: true });
   }
   fs.writeFileSync(path.join(OUTPUT_DIR, filename), buffer);
-  const base = process.env.API_BASE_URL ?? `http://localhost:${process.env.PORT ?? 5000}`;
+  const base =
+    process.env.API_BASE_URL ||
+    (process.env.VERCEL
+      ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL || process.env.VERCEL_URL || 'server-delta-six-13.vercel.app'}`
+      : `http://localhost:${process.env.PORT ?? 5000}`);
   return `${base}/output/${filename}`;
 };
 

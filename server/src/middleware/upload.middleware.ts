@@ -8,7 +8,9 @@ import { CloudinaryStorage } from 'multer-storage-cloudinary';
 // ─── Constants ────────────────────────────────────────────────────────────────
 
 const UPLOAD_MODE = process.env.STORAGE_MODE ?? 'local';  // 'local' | 'cloudinary'
-const LOCAL_UPLOAD_DIR = path.resolve(process.cwd(), 'uploads');
+const LOCAL_UPLOAD_DIR = process.env.VERCEL
+  ? '/tmp/uploads'
+  : path.resolve(process.cwd(), 'uploads');
 const MAX_FILE_SIZE_MB = 10;
 const ALLOWED_MIME_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
 
@@ -98,6 +100,10 @@ export const getUploadedFileUrl = (file: Express.Multer.File): string => {
     // multer-storage-cloudinary stores the URL in file.path
     return file.path;
   }
-  const baseUrl = process.env.API_BASE_URL ?? `http://localhost:${process.env.PORT ?? 5000}`;
+  const baseUrl =
+    process.env.API_BASE_URL ||
+    (process.env.VERCEL
+      ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL || process.env.VERCEL_URL || 'server-delta-six-13.vercel.app'}`
+      : `http://localhost:${process.env.PORT ?? 5000}`);
   return `${baseUrl}/uploads/${file.filename}`;
 };
